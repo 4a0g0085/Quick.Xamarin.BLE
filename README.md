@@ -1,47 +1,49 @@
  
 ## Quick Xamarin BLE
-用於跨平台xamarin上快速訪問藍芽
+quick access  Bluetooth Low Energy on xamarin Forms Android and IOS
 
 ![scan](https://github.com/4a0g0085/Quick.Xamarin.BLE/blob/master/src/m3.jpg)
 ![read/write/notify](https://github.com/4a0g0085/Quick.Xamarin.BLE/blob/master/src/m1.jpg)
 ![Characteristic list](https://github.com/4a0g0085/Quick.Xamarin.BLE/blob/master/src/m2.jpg)
 
-## 使用限制
+##  Limitations
 
-|平台  |限制  |
+|Platform  |Version|
 |--|--|
 | xamarin.forms |  |
 | xamarin.android   |API LEVEL>=18  |
 | xamarin.ios | ios SDK>=7|
  
-## 安裝
+##  Installation
+ 
 [**NuGet**](https://www.nuget.org/packages/Quick.Xamarin.BLE/)
 
 	Install-Package Quick.Xamarin.BLE -Version 1.0.4
 	
-## 範例功能
-由xamarin.forms製作的簡易藍芽搜尋範例，可支援android及ios，功能包含
-
- 1. 搜尋藍芽
- 2. 列出藍芽地址
- 3. 藍芽連接/段開
- 4. 尋找Service 和 Characteristic
- 5. 列出Characteristic功能
- 6. 讀出/寫入/通知 
+## Sample
+ Simple bluetooth search example. created by xamarin.forms  
+ 
+ **key features include**
+ 1. Scan Bluetooth 
+ 2. List Bluetooth addresses
+ 3. Bluetooth  connect/disconnect
+ 4. Search service and  characteristic
+ 5. List characteristic features
+ 6. Read/Write/Notify
 ## 權限
 **Android**
-AndroidManifest加入權限
+AndroidManifest add permission 
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-## 開始
-**初始化**
+## Start
+**Initialization**
 
     IBle ble = CrossBle.Createble(); 
-**搜尋藍芽**
+**Scan Bluetooth**
 
      ble.OnScanDevicesIn += (sender, device) =>
      {
@@ -54,18 +56,18 @@ AndroidManifest加入權限
      //start scan
      ble.StartScanningForDevices();
 
-**停止搜尋**
+**Stop scan**
 
      ble.StopScanningForDevices();
- **藍芽連接**
+ **Device connect**
 
      dev.ConnectToDevice();
-  **藍芽段開**
+  **Device disconnect**
   
 
     dev.DisconnectDevice();
 
- **目前藍芽連線狀態回傳**
+ **Bluetooth device Status callback event**
  
 
      ble.AdapterStatusChange += (sender,Status) =>
@@ -78,7 +80,7 @@ AndroidManifest加入權限
      };
 
    
- **取得藍芽Characteristics特性**
+ **Get device characteristics**
 
       List<IGattCharacteristic> cha= new List<IGattCharacteristic>();
      dev.CharacteristicsDiscovered(value=>
@@ -89,7 +91,7 @@ AndroidManifest加入權限
 		     cha.Add(chvaluea); 
 	     });
      });
-**取得Characteristics可使用功能**
+**Get  characteristics properties**
 
     cha[n].CanRead();
     cha[n].CanWrite();
@@ -135,9 +137,9 @@ or
          Device.BeginInvokeOnMainThread(() => { 
          });
      }
-## 注意
+## Important limitations
 
- - event 須加上Device.BeginInvokeOnMainThread
- - 避免藍芽連接後馬上取得特性，需延遲1-2秒
- - 藍芽一次只能連接一台，需Disconnect後才能連接其他台
+ - Event must be added Device.BeginInvokeOnMainThread
+ - Characteristicsmust be 1-2 seconds after the Bluetooth connection
+ - Bluetooth can only connect one at a time,When you want to connect other,Must call DisconnectDevice()  first
  
