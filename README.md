@@ -135,3 +135,9 @@ or
          Device.BeginInvokeOnMainThread(() => { 
          });
      }
+## 注意
+
+ - event 須加上Device.BeginInvokeOnMainThread
+ - 避免藍芽連接後馬上取得特性，需延遲1-2秒
+ - 藍芽一次只能連接一台，需Disconnect後才能連接其他台
+ - 
