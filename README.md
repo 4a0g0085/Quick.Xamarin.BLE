@@ -30,7 +30,7 @@ quick access  Bluetooth Low Energy on xamarin Forms Android and IOS
  4. Search service and  characteristic
  5. List characteristic features
  6. Read/Write/Notify
-## 權限
+## Permission
 **Android**
 AndroidManifest add permission 
 
